@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_tools.c                                      :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 13:07:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/07 14:53:59 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/10/07 16:58:32 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	philo_perror(char *param, t_philo_err err_code)
 {
-	ft_putstr_fd("philosophers: ", 2);
+	ft_putstr_fd("philo: ", 2);
 	if (err_code == INV_ARGS)
 		ft_putstr_fd("invalid number of arguments", 2);
 	if (err_code == INV_PHILO_COUNT)
