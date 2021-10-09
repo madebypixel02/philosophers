@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/29 10:50:06 by aperez-b          #+#    #+#              #
-#    Updated: 2021/10/09 14:54:35 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/10/09 16:41:26 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRC_LFT = ft_putstr_fd.c ft_strlen.c ft_isspace.c	\
 		  ft_atoi.c ft_isdigit.c ft_putchar_fd.c	\
 		  ft_putnbr_fd.c ft_free_matrix.c
 
-SRC = main.c philo_utils.c
+SRC = main.c philo_utils.c philo.c
 
 SRCB = 
 

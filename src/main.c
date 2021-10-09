@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 14:58:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:57:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	main(int argc, char **argv)
 	d.arr = philo_arr(d.philo_count);
 	while (d.arr && d.arr[i])
 	{
-		printf("Philosopher #%d\n", d.arr[i]->id);
 		i++;
 	}
+	philo_init(&d);
 	philo_exit(&d, NULL, END);
 	return (0);
 }

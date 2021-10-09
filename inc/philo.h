@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 14:47:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 16:54:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ useconds_t	philo_get_time(struct timeval *t);
 
 /* Fills an array with the default info for every philosopher */
 t_philo		**philo_arr(int philo_count);
+
+/* Creates threads for every philosopher */
+void		*philo_init(t_philo_data *d);
 
 #endif

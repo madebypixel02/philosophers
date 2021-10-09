@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 14:53:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:55:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+#include <pthread.h>
 
 t_philo	**philo_arr(int philo_count)
 {
@@ -70,6 +71,8 @@ int	philo_perror(char *param, t_philo_err err_code)
 		ft_putstr_fd("invalid number of arguments", 2);
 	if (err_code == NO_MEMORY)
 		ft_putstr_fd("no memory left on device", 2);
+	if (err_code == THREAD_FAILED)
+		ft_putstr_fd("failed to create new thread", 2);
 	if (err_code == INV_PHILO_COUNT)
 		ft_putstr_fd("invalid philosopher_count: ", 2);
 	if (err_code == INV_DIE_TIME)
@@ -80,7 +83,8 @@ int	philo_perror(char *param, t_philo_err err_code)
 		ft_putstr_fd("invalid time_to_sleep: ", 2);
 	if (err_code == INV_REPEAT_COUNT)
 		ft_putstr_fd("invalid repeat_times: ", 2);
-	if (param && err_code != INV_ARGS && err_code != NO_MEMORY)
+	if (param && err_code != INV_ARGS && err_code != NO_MEMORY && \
+			err_code != THREAD_FAILED)
 		ft_putstr_fd(param, 2);
 	ft_putstr_fd("\n", 2);
 	return (1);
@@ -90,7 +94,10 @@ void	*philo_exit(t_philo_data *d, char *param, t_philo_err err_code)
 {
 	if (err_code != END)
 		philo_perror(param, err_code);
-	if (d && d->arr)
-		ft_free_matrix((char ***)&d->arr);
-	return (0);
+	if (d)
+	{
+		if (d->arr)
+			ft_free_matrix((char ***)&d->arr);
+	}
+	return (NULL);
 }
