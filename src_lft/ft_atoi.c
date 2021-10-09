@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 17:10:37 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 12:31:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 13:14:39 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ long long	ft_atoi(const char *nptr)
 	n = 0;
 	while (ft_isspace(*nptr))
 		nptr++;
-	if (*nptr == '-')
-		return (-1);
 	if (*nptr == '+')
 		nptr++;
 	while (*nptr >= '0' && *nptr <= '9')

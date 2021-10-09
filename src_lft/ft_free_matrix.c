@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 17:03:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 13:22:25 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/08/06 19:51:21 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/10/09 14:56:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft_tools.h"
 
-int	ft_putnbr_fd(long unsigned n, int fd)
+void	ft_free_matrix(char ***m)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	if (n > 9)
+	i = 0;
+	while (m[0][i])
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		free(m[0][i]);
+		i++;
 	}
-	else
-		count += ft_putchar_fd(n + '0', fd);
-	return (count);
+	free(m[0]);
+	m = NULL;
 }

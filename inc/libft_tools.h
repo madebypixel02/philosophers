@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:04:47 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 12:31:50 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 14:45:50 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ long long	ft_atoi(const char *nptr);
 int			ft_putchar_fd(char c, int fd);
 
 /* Writes unsigned long number to given fd */
-int			ft_putnbr_fd(int n, long unsigned fd);
+int			ft_putnbr_fd(long unsigned n, int fd);
+
+void		ft_free_matrix(char ***m);
 
 #endif
