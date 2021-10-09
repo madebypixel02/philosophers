@@ -6,26 +6,23 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 18:55:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:29:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <pthread.h>
 
-t_philo	**philo_arr(int philo_count)
+t_philo	**philo_arr(t_philo_data d)
 {
 	int		i;
 	t_philo	**arr;
 
 	i = -1;
-	arr = NULL;
-	arr = malloc(sizeof (t_philo *) * (philo_count + 1));
+	arr = malloc(sizeof (t_philo *) * (d.philo_count + 1));
 	if (!arr)
 		return (philo_exit(NULL, NULL, NO_MEMORY));
-	while (++i < philo_count)
+	while (++i < d.philo_count)
 	{
-		arr[i] = NULL;
 		arr[i] = malloc(sizeof(struct s_philo));
 		if (!arr[i])
 		{
@@ -34,32 +31,35 @@ t_philo	**philo_arr(int philo_count)
 		}
 		arr[i]->id = i + 1;
 		arr[i]->thread_id = 0;
-		arr[i]->fork = 1;
-		arr[i]->dead = 0;
+		pthread_mutex_init(&arr[i]->mutex, NULL);
+		arr[i]->fork_available = 1;
+		arr[i]->is_dead = 0;
+		arr[i]->data = d;
 	}
 	arr[i] = NULL;
 	return (arr);
 }
 
-useconds_t	philo_get_time(struct timeval *t)
+useconds_t	philo_get_time(void)
 {
-	gettimeofday(t, NULL);
-	return (t->tv_sec * 1000 + t->tv_usec / 1000);
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
 int	ft_usleep(useconds_t usec)
 {
-	struct timeval	t;
 	useconds_t		before;
 	useconds_t		after;
 
-	before = philo_get_time(&t);
+	before = philo_get_time();
 	after = before;
 	while (after - before < usec)
 	{
 		if (usleep(usec / 10 + 1) == -1)
 			return (-1);
-		after = philo_get_time(&t);
+		after = philo_get_time();
 	}
 	return (0);
 }
@@ -72,7 +72,7 @@ int	philo_perror(char *param, t_philo_err err_code)
 	if (err_code == NO_MEMORY)
 		ft_putstr_fd("no memory left on device", 2);
 	if (err_code == THREAD_FAILED)
-		ft_putstr_fd("failed to create new thread", 2);
+		ft_putstr_fd("failed to create a thread", 2);
 	if (err_code == INV_PHILO_COUNT)
 		ft_putstr_fd("invalid philosopher_count: ", 2);
 	if (err_code == INV_DIE_TIME)
@@ -90,14 +90,11 @@ int	philo_perror(char *param, t_philo_err err_code)
 	return (1);
 }
 
-void	*philo_exit(t_philo_data *d, char *param, t_philo_err err_code)
+void	*philo_exit(t_philo **arr, char *param, t_philo_err err_code)
 {
 	if (err_code != END)
 		philo_perror(param, err_code);
-	if (d)
-	{
-		if (d->arr)
-			ft_free_matrix((char ***)&d->arr);
-	}
+	if (arr)
+		ft_free_matrix((char ***)&arr);
 	return (NULL);
 }

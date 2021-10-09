@@ -6,13 +6,11 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 18:57:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:55:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <bits/pthreadtypes.h>
-#include <pthread.h>
 
 static t_philo_data	parse_args(char **argv)
 {
@@ -43,9 +41,8 @@ static t_philo_data	parse_args(char **argv)
 int	main(int argc, char **argv)
 {
 	t_philo_data	d;
-	int				i;
+	t_philo			**arr;
 
-	i = 0;
 	if (argc != 5 && argc != 6)
 	{
 		philo_exit(NULL, NULL, INV_ARGS);
@@ -55,12 +52,9 @@ int	main(int argc, char **argv)
 	if (d.philo_count <= 0 || d.die_time == -1 || d.eat_time == -1 \
 		|| d.sleep_time == -1 || d.repeat_count == -1)
 		return (1);
-	d.arr = philo_arr(d.philo_count);
-	while (d.arr && d.arr[i])
-	{
-		i++;
-	}
-	philo_init(&d);
-	philo_exit(&d, NULL, END);
+	d.init_time = philo_get_time();
+	arr = philo_arr(d);
+	philo_init(d.philo_count, arr);
+	philo_exit(arr, NULL, END);
 	return (0);
 }

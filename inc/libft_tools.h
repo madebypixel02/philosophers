@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:04:47 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 14:45:50 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:49:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ int			ft_putchar_fd(char c, int fd);
 /* Writes unsigned long number to given fd */
 int			ft_putnbr_fd(long unsigned n, int fd);
 
+/* Frees a char ** accordingly */
 void		ft_free_matrix(char ***m);
+
+/* Writes n chars sequentially */
+int			ft_putnchar_fd(char c, int fd, int n);
+
+/* Returns length of a number in a given base */
+int			ft_nbrlen(long n, int base);
 
 #endif

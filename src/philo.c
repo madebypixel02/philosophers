@@ -6,33 +6,59 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:39:38 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 19:01:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:59:38 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+#include <unistd.h>
+
+void	philo_do(t_philo *philo, t_philo_action action, useconds_t duration)
+{
+	useconds_t	time;
+
+	time = philo_get_time() - philo->data.init_time;
+	ft_putchar_fd('[', 1);
+	ft_putnchar_fd('0', 1, 6 - ft_nbrlen(time, 10));
+	ft_putnbr_fd(time, 1);
+	ft_putchar_fd(']', 1);
+	ft_putstr_fd(" philosopher #", 1);
+	ft_putnbr_fd(philo->id, 1);
+	if (action == philo_eat)
+		ft_putstr_fd(" is eating 🍝\n", 1);
+	if (action == philo_sleep)
+		ft_putstr_fd(" is sleeping 🌙\n", 1);
+	if (action == philo_think)
+		ft_putstr_fd(" is thinking 🤔\n", 1);
+	if (action == philo_take_fork)
+		ft_putstr_fd(" has taken a fork 🔱\n", 1);
+	if (action == philo_die)
+		ft_putstr_fd(" died 💀\n", 1);
+	ft_usleep(duration);
+}
 
 void	*test(void *arr)
 {
-	t_philo	*aux;
+	t_philo	*philo;
 
-	aux = (struct s_philo *)arr;
-	ft_putstr_fd("Philosopher #", 1);
-	ft_putnbr_fd(aux->id, 1);
-	ft_putchar_fd('\n', 1);
+	philo = (struct s_philo *)arr;
+	philo_do(philo, philo_die, philo->data.die_time);
 	return (NULL);
 }
 
-void	*philo_init(t_philo_data *d)
+void	*philo_init(int philo_count, t_philo **arr)
 {
-	int	i;
+	int			i;
+	useconds_t	init_time;
 
 	i = -1;
-	while (++i < d->philo_count)
+	init_time = philo_get_time();
+	while (++i < philo_count)
 	{
-		if (pthread_create(&d->arr[i]->thread_id, NULL, test, d->arr[i]))
-			return (philo_exit(d, NULL, THREAD_FAILED));
-		pthread_join(d->arr[i]->thread_id, NULL);
+		arr[i]->data.init_time = init_time;
+		if (pthread_create(&arr[i]->thread_id, NULL, test, arr[i]))
+			return (philo_exit(arr, NULL, THREAD_FAILED));
+		pthread_join(arr[i]->thread_id, NULL);
 	}
 	return (NULL);
 }
