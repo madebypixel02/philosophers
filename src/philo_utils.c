@@ -6,11 +6,34 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/07 16:58:32 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 12:22:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+useconds_t	philo_get_time(struct timeval *t)
+{
+	gettimeofday(t, NULL);
+	return (t->tv_sec * 1000 + t->tv_usec / 1000);
+}
+
+int	ft_usleep(useconds_t usec)
+{
+	struct timeval	t;
+	useconds_t		before;
+	useconds_t		after;
+
+	before = philo_get_time(&t);
+	after = before;
+	while (after - before < usec)
+	{
+		if (usleep(usec / 10 + 1) == -1)
+			return (-1);
+		after = philo_get_time(&t);
+	}
+	return (0);
+}
 
 int	philo_perror(char *param, t_philo_err err_code)
 {
@@ -37,6 +60,5 @@ void	*philo_exit(char *param, t_philo_err err_code)
 {
 	if (err_code != END)
 		philo_perror(param, err_code);
-	exit(0);
-	return (NULL);
+	return (0);
 }

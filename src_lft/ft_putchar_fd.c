@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 17:10:37 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 12:31:14 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/04/05 17:01:29 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/10/09 12:11:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft_tools.h"
 
-long long	ft_atoi(const char *nptr)
+int	ft_putchar_fd(char c, int fd)
 {
-	long unsigned	n;
-
-	n = 0;
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr == '-')
-		return (-1);
-	if (*nptr == '+')
-		nptr++;
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		n = 10 * n + (*nptr - '0');
-		nptr++;
-	}
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr)
-		return (-1);
-	return (n);
+	return ((int)write(fd, &c, 1));
 }

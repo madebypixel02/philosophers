@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 17:10:37 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 12:31:14 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/04/05 17:03:16 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/10/09 12:10:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft_tools.h"
 
-long long	ft_atoi(const char *nptr)
+int	ft_putnbr_fd(int n, long unsigned fd)
 {
-	long unsigned	n;
+	int	count;
 
-	n = 0;
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr == '-')
-		return (-1);
-	if (*nptr == '+')
-		nptr++;
-	while (*nptr >= '0' && *nptr <= '9')
+	count = 0;
+	if (n > 9)
 	{
-		n = 10 * n + (*nptr - '0');
-		nptr++;
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr)
-		return (-1);
-	return (n);
+	else
+		count += ft_putchar_fd(n + '0', fd);
+	return (count);
 }

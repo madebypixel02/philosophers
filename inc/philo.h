@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 10:33:57 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 12:40:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 # define PHILO_H
 
 # include "libft_tools.h"
+# include <sys/time.h>
 # include <stdio.h>
+# include <pthread.h>
+# include <unistd.h>
 
 /* Enum to handle errors in philosophers */
 typedef enum e_philo_err
@@ -32,17 +35,30 @@ typedef enum e_philo_err
 /* Struct to store all data */
 typedef struct s_philo_data
 {
-	int					philo_count;
-	long long unsigned	die_time;
-	long long unsigned	eat_time;
-	long long unsigned	sleep_time;
-	long				repeat_count;
+	int			philo_count;
+	long long	die_time;
+	long long	eat_time;
+	long long	sleep_time;
+	long		repeat_count;
 }				t_philo_data;
 
+/* Struct to handle info for every philosopher */
+typedef struct s_philo
+{
+	int			id;
+	pthread_t	thread_id;
+}				t_philo;
+
 /* Prints error message with custom param given an error code */
-int		philo_perror(char *param, t_philo_err err_code);
+int			philo_perror(char *param, t_philo_err err_code);
 
 /* Prints error message and exits freeing everything */
-void	*philo_exit(char *param, t_philo_err err_code);
+void		*philo_exit(char *param, t_philo_err err_code);
+
+/* Personal & more precise implementation of the usleep function */
+int			ft_usleep(useconds_t usec);
+
+/* Returns current time in miliseconds */
+useconds_t	philo_get_time(struct timeval *t);
 
 #endif
