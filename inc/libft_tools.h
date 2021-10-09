@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:04:47 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/07 15:12:29 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 10:27:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int		ft_isspace(char c);
 int		ft_isdigit(int c);
 
 /* Returns equivalent int from a string, or -1 */
-int		ft_atoi(const char *nptr, long *nbr);
+int		ft_atoi(const char *nptr, long long unsigned *nbr);
 
 #endif

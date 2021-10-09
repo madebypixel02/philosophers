@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/07 15:05:50 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 10:33:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef enum e_philo_err
 /* Struct to store all data */
 typedef struct s_philo_data
 {
-	long	philo_count;
-	long	die_time;
-	long	eat_time;
-	long	sleep_time;
-	long	repeat_count;
+	int					philo_count;
+	long long unsigned	die_time;
+	long long unsigned	eat_time;
+	long long unsigned	sleep_time;
+	long				repeat_count;
 }				t_philo_data;
 
 /* Prints error message with custom param given an error code */

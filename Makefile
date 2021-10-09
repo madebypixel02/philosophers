@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/29 10:50:06 by aperez-b          #+#    #+#              #
-#    Updated: 2021/10/07 15:11:47 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/10/09 10:08:17 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ NAME = $(BIN_DIR)/$(BIN)
 SRC_LFT = ft_putstr_fd.c ft_strlen.c ft_isspace.c	\
 		  ft_atoi.c ft_isdigit.c
 
-SRC = main.c philo_tools.c
+SRC = main.c philo_utils.c
 
 SRCB = 
 
