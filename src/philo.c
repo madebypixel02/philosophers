@@ -6,14 +6,14 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:39:38 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 20:59:38 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/09 21:05:03 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 #include <unistd.h>
 
-void	philo_do(t_philo *philo, t_philo_action action, useconds_t duration)
+void	philo_timestamp(t_philo *philo, t_philo_action action, useconds_t dur)
 {
 	useconds_t	time;
 
@@ -34,7 +34,7 @@ void	philo_do(t_philo *philo, t_philo_action action, useconds_t duration)
 		ft_putstr_fd(" has taken a fork 🔱\n", 1);
 	if (action == philo_die)
 		ft_putstr_fd(" died 💀\n", 1);
-	ft_usleep(duration);
+	ft_usleep(dur);
 }
 
 void	*test(void *arr)
@@ -42,7 +42,7 @@ void	*test(void *arr)
 	t_philo	*philo;
 
 	philo = (struct s_philo *)arr;
-	philo_do(philo, philo_die, philo->data.die_time);
+	philo_timestamp(philo, philo_die, philo->data.die_time);
 	return (NULL);
 }
 
