@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 19:10:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/10 21:08:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int	main(int argc, char **argv)
 	philos = philo_lst(&d);
 	ft_lstlast(philos)->next = philos;
 	philo_init(d.philo_count, philos);
-	philo_exit(philos, NULL, END);
+	//philo_exit(philos, NULL, END);
 	return (0);
 }

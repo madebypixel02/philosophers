@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 20:08:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/10 21:09:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ void	*philo_exit(t_list *philos, char *param, t_philo_err err_code)
 	i = -1;
 	if (err_code != END)
 		philo_perror(param, err_code);
-	/*if (philos)
+	if (philos)
 	{
 		philo = (struct s_philo *)philos->content;
-		while(philo && ++i < philo->data->philo_count)
+		while (philo && ++i < philo->data->philo_count)
 		{
 			temp = philos;
 			philos = philos->next;
 			philo = (struct s_philo *)philos->content;
 			ft_lstdelone(temp, free);
 		}
-	}*/
+	}
 	return (NULL);
 }
