@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:04:47 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 20:49:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/10 19:34:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
 
 /* Returns length of string */
 size_t		ft_strlen(const char *s);
@@ -46,5 +52,17 @@ int			ft_putnchar_fd(char c, int fd, int n);
 
 /* Returns length of a number in a given base */
 int			ft_nbrlen(long n, int base);
+
+/* Adds a node at the end of a list */
+void		ft_lstadd_back(t_list **lst, t_list *newnode);
+
+/* Creates new node */
+t_list		*ft_lstnew(void *content);
+
+/* Returns last node of linked list */
+t_list		*ft_lstlast(t_list *lst);
+
+/* Deletes one node in a linked list */
+void		ft_lstdelone(t_list *lst, void (*del)(void*));
 
 #endif

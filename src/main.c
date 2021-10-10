@@ -6,11 +6,12 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 20:55:29 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/10 19:10:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+#include <bits/struct_mutex.h>
 
 static t_philo_data	parse_args(char **argv)
 {
@@ -41,7 +42,7 @@ static t_philo_data	parse_args(char **argv)
 int	main(int argc, char **argv)
 {
 	t_philo_data	d;
-	t_philo			**arr;
+	t_list			*philos;
 
 	if (argc != 5 && argc != 6)
 	{
@@ -53,8 +54,9 @@ int	main(int argc, char **argv)
 		|| d.sleep_time == -1 || d.repeat_count == -1)
 		return (1);
 	d.init_time = philo_get_time();
-	arr = philo_arr(d);
-	philo_init(d.philo_count, arr);
-	philo_exit(arr, NULL, END);
+	philos = philo_lst(&d);
+	ft_lstlast(philos)->next = philos;
+	philo_init(d.philo_count, philos);
+	philo_exit(philos, NULL, END);
 	return (0);
 }

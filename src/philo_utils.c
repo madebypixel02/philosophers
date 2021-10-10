@@ -6,62 +6,37 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 20:29:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/10 20:08:54 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-t_philo	**philo_arr(t_philo_data d)
+t_philo	*philo_get_data(t_philo_data *d, int i)
+{
+	t_philo	*node;
+
+	node = malloc(sizeof(struct s_philo));
+	if (!node)
+		return (philo_exit(NULL, NULL, THREAD_FAILED));
+	node->id = i + 1;
+	node->thread_id = 0;
+	pthread_mutex_init(&node->fork_lock, NULL);
+	node->is_dead = 0;
+	node->data = d;
+	return (node);
+}
+
+t_list	*philo_lst(t_philo_data *d)
 {
 	int		i;
-	t_philo	**arr;
+	t_list	*philos;
 
 	i = -1;
-	arr = malloc(sizeof (t_philo *) * (d.philo_count + 1));
-	if (!arr)
-		return (philo_exit(NULL, NULL, NO_MEMORY));
-	while (++i < d.philo_count)
-	{
-		arr[i] = malloc(sizeof(struct s_philo));
-		if (!arr[i])
-		{
-			free(arr);
-			return (philo_exit(NULL, NULL, NO_MEMORY));
-		}
-		arr[i]->id = i + 1;
-		arr[i]->thread_id = 0;
-		pthread_mutex_init(&arr[i]->mutex, NULL);
-		arr[i]->fork_available = 1;
-		arr[i]->is_dead = 0;
-		arr[i]->data = d;
-	}
-	arr[i] = NULL;
-	return (arr);
-}
-
-useconds_t	philo_get_time(void)
-{
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return (t.tv_sec * 1000 + t.tv_usec / 1000);
-}
-
-int	ft_usleep(useconds_t usec)
-{
-	useconds_t		before;
-	useconds_t		after;
-
-	before = philo_get_time();
-	after = before;
-	while (after - before < usec)
-	{
-		if (usleep(usec / 10 + 1) == -1)
-			return (-1);
-		after = philo_get_time();
-	}
-	return (0);
+	philos = NULL;
+	while (++i < d->philo_count)
+		ft_lstadd_back(&philos, ft_lstnew(philo_get_data(d, i)));
+	return (philos);
 }
 
 int	philo_perror(char *param, t_philo_err err_code)
@@ -90,11 +65,25 @@ int	philo_perror(char *param, t_philo_err err_code)
 	return (1);
 }
 
-void	*philo_exit(t_philo **arr, char *param, t_philo_err err_code)
+void	*philo_exit(t_list *philos, char *param, t_philo_err err_code)
 {
+	t_list	*temp;
+	t_philo	*philo;
+	int		i;
+
+	i = -1;
 	if (err_code != END)
 		philo_perror(param, err_code);
-	if (arr)
-		ft_free_matrix((char ***)&arr);
+	/*if (philos)
+	{
+		philo = (struct s_philo *)philos->content;
+		while(philo && ++i < philo->data->philo_count)
+		{
+			temp = philos;
+			philos = philos->next;
+			philo = (struct s_philo *)philos->content;
+			ft_lstdelone(temp, free);
+		}
+	}*/
 	return (NULL);
 }

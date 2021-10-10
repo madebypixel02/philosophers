@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/29 10:50:06 by aperez-b          #+#    #+#              #
-#    Updated: 2021/10/09 20:46:47 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/10/10 19:15:44 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,12 @@ NAME = $(BIN_DIR)/$(BIN)
 
 SRC_LFT = ft_putstr_fd.c ft_strlen.c ft_isspace.c	\
 		  ft_atoi.c ft_isdigit.c ft_putchar_fd.c	\
-		  ft_putnbr_fd.c ft_free_matrix.c			\
-		  ft_nbrlen.c ft_putnchar_fd.c
+		  ft_putnbr_fd.c ft_nbrlen.c				\
+		  ft_putnchar_fd.c ft_lstadd_back.c			\
+		  ft_lstnew.c ft_lstsize.c ft_lstdelone.c	\
+		  ft_lstlast.c
 
-SRC = main.c philo_utils.c philo.c
+SRC = main.c philo_utils.c philo.c philo_time.c
 
 SRCB = 
 

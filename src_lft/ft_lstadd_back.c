@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/06 19:51:21 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 14:56:00 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/04/13 09:02:48 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/10/10 18:21:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft_tools.h"
 
-void	ft_free_matrix(char ***m)
+void	ft_lstadd_back(t_list **lst, t_list *newnode)
 {
-	int	i;
+	t_list	*start;
 
-	i = 0;
-	while (m[0][i])
+	start = *lst;
+	if (*lst)
 	{
-		free(m[0][i]);
-		i++;
+		while (start->next)
+			start = start->next;
+		start->next = newnode;
 	}
-	free(m[0]);
-	m = NULL;
+	else
+		*lst = newnode;
 }
