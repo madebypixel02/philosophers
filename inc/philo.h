@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 21:08:18 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/11 22:27:39 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef struct s_philo
 	int					id;
 	pthread_t			thread_id;
 	pthread_mutex_t		fork_lock;
-	int					is_dead;
+	pthread_mutex_t		last_meal_lock;
+	useconds_t			last_meal;
 	struct s_philo_data	*data;
 }						t_philo;
 

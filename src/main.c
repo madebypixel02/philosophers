@@ -6,12 +6,11 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 21:08:52 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/11 22:27:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <bits/struct_mutex.h>
 
 static t_philo_data	parse_args(char **argv)
 {

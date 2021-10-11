@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 21:09:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/11 12:00:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ t_philo	*philo_get_data(t_philo_data *d, int i)
 	node->id = i + 1;
 	node->thread_id = 0;
 	pthread_mutex_init(&node->fork_lock, NULL);
-	node->is_dead = 0;
+	pthread_mutex_init(&node->last_meal_lock, NULL);
 	node->data = d;
+	node->last_meal = 0;
 	return (node);
 }
 

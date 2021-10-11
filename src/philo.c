@@ -6,11 +6,13 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:39:38 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 21:08:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/11 22:16:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+#include <stdio.h>
+#include <unistd.h>
 
 void	philo_timestamp(t_list *philos, char *action, useconds_t t)
 {
@@ -36,16 +38,21 @@ void	*get_forks(void *node)
 	next = philos->next->content;
 	if (!(philo->id % 2))
 		ft_usleep(10);
-	while (philo->data->repeat_count == -1 || ++i < philo->data->repeat_count)
+	while (philo->data->repeat_count == -2 || ++i < philo->data->repeat_count)
 	{
 		pthread_mutex_lock(&philo->fork_lock);
 		philo_timestamp(philos, PHILO_TAKE_FORK, 0);
 		pthread_mutex_lock(&next->fork_lock);
 		philo_timestamp(philos, PHILO_TAKE_FORK, 0);
+		pthread_mutex_lock(&philo->last_meal_lock);
+		philo->last_meal = philo_get_time() - philo->data->init_time;
 		philo_timestamp(philos, PHILO_EAT, philo->data->eat_time);
+		philo->last_meal = philo_get_time() - philo->data->init_time;
+		pthread_mutex_unlock(&philo->last_meal_lock);
+		philo_timestamp(philos, PHILO_SLEEP, 0);
 		pthread_mutex_unlock(&next->fork_lock);
 		pthread_mutex_unlock(&philo->fork_lock);
-		philo_timestamp(philos, PHILO_SLEEP, philo->data->sleep_time);
+		ft_usleep(philo->data->sleep_time);
 		philo_timestamp(philos, PHILO_THINK, 0);
 	}
 	return (NULL);
@@ -66,8 +73,17 @@ void	*philo_init(int philo_count, t_list *philos)
 			return (philo_exit(philos, NULL, THREAD_FAILED));
 		start = start->next;
 	}
-	i = -1;
-	while (++i < philo_count)
-		pthread_join(philo->thread_id, NULL);
+	while (1)
+	{
+		philo = start->content;
+		if (philo_get_time() - philo->data->init_time - \
+			philo->last_meal > philo->data->die_time)
+		{
+			philo_timestamp(start, PHILO_DIE, 0);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&philo->last_meal_lock);
+		start = start->next;
+	}
 	return (NULL);
 }
