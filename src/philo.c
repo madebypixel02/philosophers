@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:39:38 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/12 17:32:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:25:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	philo_timestamp(t_list *philos, char *action, useconds_t t)
 	t_philo		*philo;
 
 	philo = philos->content;
-	if (!philo->data->died)
-	{
-		time = philo_get_time() - philo->data->init_time;
-		printf("[\033[1;39m%06u\033[0;39m] \033[1;96m%d \033[0;39m%s\n", time, philo->id, action);
-		ft_usleep(t);
-	}
+	pthread_mutex_lock(&philo->data->died_lock);
+	time = philo_get_time() - philo->data->init_time;
+	if (!philo->data->died || action[7] == 'd')
+		printf("[\033[1;39m%06u\033[0;39m]  \033[1;96m%03d  \033[0;39m%s\n", \
+			time, philo->id, action);
+	pthread_mutex_unlock(&philo->data->died_lock);
+	ft_usleep(t);
 }
 
 void	*get_forks(void *node)
@@ -79,13 +80,18 @@ void	*philo_init(int philo_count, t_list *philos)
 	while (1)
 	{
 		philo = start->content;
+		pthread_mutex_lock(&philo->last_meal_lock);
 		if (philo_get_time() - philo->data->init_time - \
 			philo->last_meal >= philo->data->die_time)
 		{
-			philo_timestamp(start, PHILO_DIE, 0);
+			pthread_mutex_lock(&philo->data->died_lock);
 			philo->data->died = 1;
+			pthread_mutex_unlock(&philo->data->died_lock);
+			philo_timestamp(start, PHILO_DIE, 0);
+			pthread_mutex_unlock(&philo->last_meal_lock);
 			return (NULL);
 		}
+		pthread_mutex_unlock(&philo->last_meal_lock);
 		start = start->next;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/12 13:10:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:46:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define PHILO_H
 
 # include "libft_tools.h"
-#include <sys/_pthread/_pthread_mutex_t.h>
 # include <sys/time.h>
 # include <stdio.h>
 # include <pthread.h>
