@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/11 22:27:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:10:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 # define PHILO_H
 
 # include "libft_tools.h"
+#include <sys/_pthread/_pthread_mutex_t.h>
 # include <sys/time.h>
 # include <stdio.h>
 # include <pthread.h>
 # include <unistd.h>
 
-# define PHILO_EAT "is eating 🍝"
-# define PHILO_SLEEP "is sleeping 🌙"
-# define PHILO_THINK "is thinking 💭"
-# define PHILO_TAKE_FORK "has taken a fork 🍴"
-# define PHILO_DIE "died 💀"
+# define PHILO_EAT "\033[1;93mis eating 🍝\033[0;39m"
+# define PHILO_SLEEP "\033[1;95mis sleeping 🌙\033[0;39m"
+# define PHILO_THINK "\033[1;90mis thinking 💭\033[0;39m"
+# define PHILO_TAKE_FORK "\033[1;94mhas taken a fork 🍴\033[0;39m"
+# define PHILO_DIE "\033[1;91mdied 💀\033[0;39m"
 
 /* Enum to handle errors in philosophers */
 typedef enum e_philo_err
@@ -48,6 +49,8 @@ typedef struct s_philo_data
 	long long		die_time;
 	long long		eat_time;
 	long long		sleep_time;
+	pthread_mutex_t	died_lock;
+	int				died;
 	long			repeat_count;
 }					t_philo_data;
 

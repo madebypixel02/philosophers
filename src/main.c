@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/11 22:27:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/12 11:42:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static t_philo_data	parse_args(char **argv)
 		if (d.repeat_count == -1)
 			philo_exit(NULL, argv[5], INV_REPEAT_COUNT);
 	}
+	d.died = 0;
+	pthread_mutex_init(&d.died_lock, NULL);
 	return (d);
 }
 

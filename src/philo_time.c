@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:30:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 18:57:38 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/12 12:25:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_usleep(useconds_t usec)
 	after = before;
 	while (after - before < usec)
 	{
-		if (usleep(usec / 10 + 1) == -1)
+		if (usleep(usec) == -1)
 			return (-1);
 		after = philo_get_time();
 	}
