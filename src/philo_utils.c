@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/12 17:40:56 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 10:34:14 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+#include <pthread.h>
 
 t_philo	*philo_get_data(t_philo_data *d, int i)
 {
@@ -66,25 +67,41 @@ int	philo_perror(char *param, t_philo_err err_code)
 	return (1);
 }
 
+void	philo_timestamp(t_list *philos, char *action, useconds_t t)
+{
+	useconds_t	time;
+	t_philo		*philo;
+
+	philo = philos->content;
+	pthread_mutex_lock(&philo->data->died_lock);
+	pthread_mutex_lock(&philo->data->eat_count_lock);
+	time = philo_get_time() - philo->data->init_time;
+	if (philo->data->repeat_count * philo->data->philo_count != \
+			philo->data->eat_count && (!philo->data->died || action[7] == 'd'))
+		printf("[\033[1;39m%06u\033[0;39m]  \033[1;96m%03d  \033[0;39m%s\n", \
+			time, philo->id, action);
+	if (action[10] == 'e')
+		philo->data->eat_count++;
+	pthread_mutex_unlock(&philo->data->eat_count_lock);
+	pthread_mutex_unlock(&philo->data->died_lock);
+	ft_usleep(t);
+}
+
 void	*philo_exit(t_list *philos, char *param, t_philo_err err_code)
 {
-	t_list	*temp;
 	t_philo	*philo;
-	int		i;
+	t_list	*temp;
 
-	i = -1;
+	temp = philos;
 	if (err_code != END)
 		philo_perror(param, err_code);
-	if (philos)
+	while (philos)
 	{
-		philo = (struct s_philo *)philos->content;
-		while (philo && ++i < philo->data->philo_count)
-		{
-			temp = philos;
-			philos = philos->next;
-			philo = (struct s_philo *)philos->content;
-			ft_lstdelone(temp, free);
-		}
+		philo = philos->content;
+		if (philo->id == philo->data->philo_count)
+			philos->next = NULL;
+		philos = philos->next;
 	}
+	ft_lstclear(&temp, free);
 	return (NULL);
 }

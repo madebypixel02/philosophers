@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/12 17:46:24 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 10:35:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ typedef struct s_philo_data
 {
 	int				philo_count;
 	useconds_t		init_time;
+	long			repeat_count;
 	long long		die_time;
 	long long		eat_time;
 	long long		sleep_time;
-	pthread_mutex_t	died_lock;
+	long			eat_count;
+	pthread_mutex_t	eat_count_lock;
 	int				died;
-	long			repeat_count;
+	pthread_mutex_t	died_lock;
 }					t_philo_data;
 
 /* Struct to handle info for every philosopher */
@@ -59,8 +61,8 @@ typedef struct s_philo
 	int					id;
 	pthread_t			thread_id;
 	pthread_mutex_t		fork_lock;
-	pthread_mutex_t		last_meal_lock;
 	useconds_t			last_meal;
+	pthread_mutex_t		last_meal_lock;
 	struct s_philo_data	*data;
 }						t_philo;
 
@@ -81,5 +83,8 @@ t_list		*philo_lst(t_philo_data *d);
 
 /* Creates threads for every philosopher */
 void		*philo_init(int philo_count, t_list *philos);
+
+/* Prints current state of a philosopher if applicable */
+void		philo_timestamp(t_list *philos, char *action, useconds_t t);
 
 #endif

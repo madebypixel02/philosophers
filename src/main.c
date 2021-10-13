@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/12 11:42:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 10:16:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ static t_philo_data	parse_args(char **argv)
 	if (argv[5])
 	{
 		d.repeat_count = ft_atoi(argv[5]);
-		if (d.repeat_count == -1)
+		if (d.repeat_count == -1 || !d.repeat_count)
 			philo_exit(NULL, argv[5], INV_REPEAT_COUNT);
 	}
-	d.died = 0;
-	pthread_mutex_init(&d.died_lock, NULL);
 	return (d);
 }
 
@@ -48,16 +46,22 @@ int	main(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 	{
 		philo_exit(NULL, NULL, INV_ARGS);
+		printf("\nusage: philo <philo_count> <die_time>");
+		printf(" <eat_time> <sleep_time> [<repeat_times>]\n");
 		return (1);
 	}
 	d = parse_args(argv);
 	if (d.philo_count <= 0 || d.die_time == -1 || d.eat_time == -1 \
-		|| d.sleep_time == -1 || d.repeat_count == -1)
+		|| d.sleep_time == -1 || d.repeat_count == -1 || !d.repeat_count)
 		return (1);
 	d.init_time = philo_get_time();
+	d.died = 0;
+	d.eat_count = 0;
+	pthread_mutex_init(&d.died_lock, NULL);
+	pthread_mutex_init(&d.eat_count_lock, NULL);
 	philos = philo_lst(&d);
 	ft_lstlast(philos)->next = philos;
 	philo_init(d.philo_count, philos);
-	//philo_exit(philos, NULL, END);
+	philo_exit(philos, NULL, END);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:04:47 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/10 19:34:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 10:11:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ t_list		*ft_lstnew(void *content);
 
 /* Returns last node of linked list */
 t_list		*ft_lstlast(t_list *lst);
+
+/* Deletes every node of linked list */
+void		ft_lstclear(t_list **lst, void (*del)(void*));
 
 /* Deletes one node in a linked list */
 void		ft_lstdelone(t_list *lst, void (*del)(void*));
