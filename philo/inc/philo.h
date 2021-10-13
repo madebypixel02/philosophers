@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 10:35:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 13:41:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ typedef enum e_philo_err
 {
 	END = 1,
 	INV_ARGS = -1,
-	INV_PHILO_COUNT = -2,
-	INV_DIE_TIME = -3,
-	INV_EAT_TIME = -4,
-	INV_SLEEP_TIME = -5,
-	INV_REPEAT_COUNT = -6,
-	NO_MEMORY = -7,
-	THREAD_FAILED = -8
+	TOO_MANY_PHILO = -2,
+	INV_PHILO_COUNT = -3,
+	INV_DIE_TIME = -4,
+	INV_EAT_TIME = -5,
+	INV_SLEEP_TIME = -6,
+	INV_REPEAT_COUNT = -7,
+	NO_MEMORY = -8,
+	THREAD_FAILED = -9
 }			t_philo_err;
 
 /* Struct to store all data */

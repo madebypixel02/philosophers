@@ -6,14 +6,11 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:39:38 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 12:41:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 13:46:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
 
 void	philo_actions(t_list *node, t_philo *philo, t_philo *next)
 {

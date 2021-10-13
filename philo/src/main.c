@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 11:30:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 13:49:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static t_philo_data	parse_args(char **argv)
 	d.philo_count = ft_atoi(argv[1]);
 	if (d.philo_count <= 0)
 		philo_exit(NULL, argv[1], INV_PHILO_COUNT);
+	if (d.philo_count > 600)
+		philo_exit(NULL, argv[1], TOO_MANY_PHILO);
 	d.die_time = ft_atoi(argv[2]);
 	if (d.die_time == -1)
 		philo_exit(NULL, argv[2], INV_DIE_TIME);
@@ -51,8 +53,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	d = parse_args(argv);
-	if (d.philo_count <= 0 || d.die_time == -1 || d.eat_time == -1 \
-		|| d.sleep_time == -1 || d.repeat_count == -1 || !d.repeat_count)
+	if (d.philo_count <= 0 || d.philo_count > 600 || d.die_time == -1 || \
+		d.eat_time == -1 || d.sleep_time == -1 || d.repeat_count == -1 || \
+		!d.repeat_count)
 		return (1);
 	d.init_time = philo_get_time();
 	d.died = 0;

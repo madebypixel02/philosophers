@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/29 10:50:06 by aperez-b          #+#    #+#              #
-#    Updated: 2021/10/13 11:50:26 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/10/13 13:45:55 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,9 @@ SRC_LFT = lists.c strings.c numbers.c
 
 SRC = main.c philo_utils.c philo.c philo_time.c
 
-SRCB = 
-
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_LFT = $(addprefix $(OBJ_LFT_DIR)/, $(SRC_LFT:.c=.o))
-
-OBJB = $(addprefix $(OBJB_DIR)/, $(SRCB:.c=.o))
 
 all: $(NAME)
 
@@ -74,18 +70,9 @@ $(OBJ_LFT_DIR)/%.o: $(SRC_LFT_DIR)/%.c
 	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
 	@$(CC) $(CFLAGS) $(CDEBUG) -c $< -o $@
 
-bonus: create_dirs $(OBJ_LFT) $(OBJB)
-	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJB) $(OBJ_LFT) -o $(NAME)
-	@$(ECHO) "$(MAGENTA)Bonus Compilation Complete in $(BIN)!$(DEFAULT)"
-
-$(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c
-	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
-	@$(CC) $(CFLAGS) $(CDEBUG) -c $< -o $@
-
 create_dirs:
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_LFT_DIR)
-	@mkdir -p $(OBJB_DIR)
 	@mkdir -p $(BIN_DIR)
 
 test: all
@@ -94,9 +81,8 @@ test: all
 	@$(LEAKS)./$(NAME) $(N)
 
 clean:
-	@$(ECHO) "$(CYAN)Cleaning up object files in $(OBJ_DIR), $(OBJB_DIR) and $(OBJ_LFT_DIR)...$(DEFAULT)"
+	@$(ECHO) "$(CYAN)Cleaning up object files in $(OBJ_DIR), and $(OBJ_LFT_DIR)...$(DEFAULT)"
 	@$(RM) -r $(OBJ_DIR)
-	@$(RM) -r $(OBJB_DIR)
 	@$(RM) -r $(OBJ_LFT_DIR)
 
 fclean: clean
@@ -105,7 +91,7 @@ fclean: clean
 
 norminette:
 	@$(ECHO) "$(CYAN)\nChecking norm for $(BIN)...$(DEFAULT)"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(SRCB_DIR) $(SRC_LFT_DIR) inc/
+	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(SRC_LFT_DIR) inc/
 
 re: fclean all
 	@$(ECHO) "$(YELLOW)Cleaned and Rebuilt Everything for $(BIN)!$(DEFAULT)"

@@ -6,12 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 10:34:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 13:49:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <pthread.h>
 
 t_philo	*philo_get_data(t_philo_data *d, int i)
 {
@@ -60,6 +59,8 @@ int	philo_perror(char *param, t_philo_err err_code)
 		ft_putstr_fd("invalid time_to_sleep: ", 2);
 	if (err_code == INV_REPEAT_COUNT)
 		ft_putstr_fd("invalid repeat_times: ", 2);
+	if (err_code == TOO_MANY_PHILO)
+		ft_putstr_fd("system may not be able to handle that many threads: ", 2);
 	if (param && err_code != INV_ARGS && err_code != NO_MEMORY && \
 			err_code != THREAD_FAILED)
 		ft_putstr_fd(param, 2);
