@@ -6,12 +6,11 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:03:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 15:35:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 21:22:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-#include <stdlib.h>
 
 static t_philo_data	parse_args(char **argv)
 {
