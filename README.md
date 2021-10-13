@@ -17,6 +17,7 @@
 	* [Deadlocks](#deadlocks)
 	* [usleep](#usleep)
 * [Installation](#installation)
+* [References](#references)
 * [Summary](#summary)
 
 ## Introduction
@@ -106,6 +107,13 @@ make norminette		runs norminette on all source files
 ![Screen-recording-2021-10-13-1004](https://user-images.githubusercontent.com/40824677/137205200-6606f03c-2fbf-495d-bf45-7df8ee485c0e.gif)
 
 ![Screen-recording-2021-10-13-1006](https://user-images.githubusercontent.com/40824677/137205228-d744b52b-5342-4ba5-842a-06ab677c53ef.gif)
+
+## References
+
+* [🇺🇲 Mutex Synchronization in Linux with Pthreads - Brian Fraser](https://www.youtube.com/watch?v=GXXE42bkqQk)
+* [🇺🇲 Multithreading Code - Computerphile](https://www.youtube.com/watch?v=7ENFeb-J75k)
+* [🇺🇲 Dining Philosophers Problem with Solution - Gary Explains](https://www.youtube.com/watch?v=NbwbQQB7xNQ)
+* [🇪🇸 Mutex. Sincronización de hilos. Programar en C, Linux - WhileTrueThenDream](https://www.youtube.com/watch?v=faZEhIHdJx8&t=19s)
 
 ## Summary
 
