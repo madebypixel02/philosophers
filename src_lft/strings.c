@@ -1,16 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 17:03:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/09 13:22:25 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/10/13 11:52:44 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/10/13 11:55:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft_tools.h"
+
+size_t	ft_strlen(const char *s)
+{
+	int	count;
+
+	count = 0;
+	if (!s)
+		return (count);
+	while (*s != '\0')
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
+
+int	ft_putchar_fd(char c, int fd)
+{
+	return ((int)write(fd, &c, 1));
+}
 
 int	ft_putnbr_fd(long unsigned n, int fd)
 {
@@ -24,5 +44,22 @@ int	ft_putnbr_fd(long unsigned n, int fd)
 	}
 	else
 		count += ft_putchar_fd(n + '0', fd);
+	return (count);
+}
+
+int	ft_putstr_fd(char *s, int fd)
+{
+	if (s != NULL)
+		return ((int)write(fd, s, ft_strlen(s)));
+	return (0);
+}
+
+int	ft_putnchar_fd(char c, int fd, int n)
+{
+	int	count;
+
+	count = 0;
+	while (n-- > 0)
+		count += (int)write(fd, &c, 1);
 	return (count);
 }
