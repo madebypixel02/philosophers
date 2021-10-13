@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:39:38 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 10:39:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/13 11:33:22 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	*start_thread(void *node)
 	next = ((struct s_list *)node)->next->content;
 	ft_usleep(10 * !(philo->id % 2));
 	pthread_mutex_lock(&philo->data->died_lock);
-	while (!philo->data->died && (philo->data->repeat_count == -2 \
-		|| ++i < philo->data->repeat_count))
+	while (philo->id != next->id && !philo->data->died && \
+		(philo->data->repeat_count == -2 || ++i < philo->data->repeat_count))
 	{
 		pthread_mutex_unlock(&philo->data->died_lock);
 		philo_actions(node, philo, next);
