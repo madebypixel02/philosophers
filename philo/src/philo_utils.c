@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/13 13:49:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/17 19:22:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,24 @@ void	philo_timestamp(t_list *philos, char *action, useconds_t t)
 {
 	useconds_t	time;
 	t_philo		*philo;
+	int			died;
 
 	philo = philos->content;
 	pthread_mutex_lock(&philo->data->died_lock);
+	died = philo->data->died;
+	pthread_mutex_unlock(&philo->data->died_lock);
 	pthread_mutex_lock(&philo->data->eat_count_lock);
 	time = philo_get_time() - philo->data->init_time;
 	if (philo->data->repeat_count * philo->data->philo_count != \
-			philo->data->eat_count && (!philo->data->died || action[7] == 'd'))
+			philo->data->eat_count && (!died || action[7] == 'd'))
 		printf("[\033[1;39m%06u\033[0;39m]  \033[1;96m%03d  \033[0;39m%s\n", \
 			time, philo->id, action);
 	if (action[10] == 'e')
 		philo->data->eat_count++;
 	pthread_mutex_unlock(&philo->data->eat_count_lock);
-	pthread_mutex_unlock(&philo->data->died_lock);
-	ft_usleep(t);
+	if (philo->data->repeat_count * philo->data->philo_count != \
+			philo->data->eat_count && (!died || action[7] == 'd'))
+		ft_usleep(t);
 }
 
 void	*philo_exit(t_list *philos, char *param, t_philo_err err_code)
