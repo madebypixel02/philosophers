@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:58:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/10/17 20:56:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/18 08:02:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	philo_timestamp(t_list *philos, char *action, useconds_t t)
 	philo = philos->content;
 	pthread_mutex_lock(&philo->data->died_lock);
 	died = philo->data->died;
-	pthread_mutex_unlock(&philo->data->died_lock);
 	pthread_mutex_lock(&philo->data->eat_count_lock);
 	eat_count = philo->data->eat_count;
 	time = philo_get_time() - philo->data->init_time;
@@ -91,6 +90,7 @@ void	philo_timestamp(t_list *philos, char *action, useconds_t t)
 	if (action[10] == 'e')
 		philo->data->eat_count++;
 	pthread_mutex_unlock(&philo->data->eat_count_lock);
+	pthread_mutex_unlock(&philo->data->died_lock);
 	if (philo->data->repeat_count * philo->data->philo_count != \
 			eat_count && (!died || action[7] == 'd'))
 		ft_usleep(t);
