@@ -22,7 +22,7 @@
 
 ## Introduction
 
-This project follows the trend we saw with the pipex project. However instead of using forks we use threads to run several tasks in parallel. Also, because of some properties of threads, using mutexes are needed
+This project follows the trend we saw with the pipex project. However instead of using forks we use threads to run several tasks in parallel. Also, because of some properties of threads, mutexes are needed
 
 ### Dining Philosophers Problem
 
