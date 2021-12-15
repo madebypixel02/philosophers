@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/29 10:50:06 by aperez-b          #+#    #+#              #
-#    Updated: 2021/12/15 19:08:21 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/12/15 19:36:08 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,21 @@ OBJ_LFT = $(addprefix $(OBJ_LFT_DIR)/, $(SRC_LFT:.c=.o))
 
 # Progress vars
 SRC_COUNT_TOT := $(shell expr $(shell echo -n $(SRC) | wc -w) - $(shell ls -l $(OBJ_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+ifeq ($(shell test $(SRC_COUNT_TOT) -le 0; echo $$?),0)
+	SRC_COUNT_TOT := 1
+endif
 SRC_COUNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 SRCB_COUNT_TOT := $(shell expr $(shell echo -n $(SRCB) | wc -w) - $(shell ls -l $(OBJB_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+ifeq ($(shell test $(SRCB_COUNT_TOT) -le 0; echo $$?),0)
+	SRCB_COUNT_TOT := 1
+endif
 SRCB_COUNT := 0
 SRCB_PCT = $(shell expr 100 \* $(SRCB_COUNT) / $(SRCB_COUNT_TOT))
 SRC_LFT_COUNT_TOT := $(shell expr $(shell echo -n $(SRC_LFT) | wc -w) - $(shell ls -l $(OBJ_LFT_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+ifeq ($(shell test $(SRC_LFT_COUNT_TOT) -le 0; echo $$?),0)
+	SRC_LFT_COUNT_TOT := 1
+endif
 SRC_LFT_COUNT := 0
 SRC_LFT_PCT = $(shell expr 100 \* $(SRC_LFT_COUNT) / $(SRC_LFT_COUNT_TOT))
 
