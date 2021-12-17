@@ -104,9 +104,9 @@ make norminette		runs norminette on all source files
 
 * Examples
 
-![Screen-recording-2021-10-13-1004](https://user-images.githubusercontent.com/40824677/137205200-6606f03c-2fbf-495d-bf45-7df8ee485c0e.gif)
+![philo1](https://user-images.githubusercontent.com/40824677/146552782-cf1b4f55-3eb9-4b8b-9768-6af30172a6a5.gif)
 
-![Screen-recording-2021-10-13-1006](https://user-images.githubusercontent.com/40824677/137205228-d744b52b-5342-4ba5-842a-06ab677c53ef.gif)
+![philo2](https://user-images.githubusercontent.com/40824677/146553558-fe8be2eb-3b0d-4c72-925f-6a2128319b36.gif)
 
 ## References
 
