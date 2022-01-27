@@ -53,7 +53,7 @@ usage: philo <philo_count> <die_time> <eat_time> <sleep_time> [<repeat_times>]
 | ``die_time`` | How often a philosopher must eat | At least ``0`` |
 | ``eat_time`` | How long it takes for a philosopher to eat | At least ``0`` |
 | ``sleep_time`` | How long it takes for a philosopher to sleep | At least ``0`` |
-| ``repeat_times`` | How long it takes for a philosopher to eat | (optional arg) Larger than ``0`` |
+| ``repeat_times`` | Number of times every philosopher must eat before exiting | (optional arg) Larger than ``0`` |
 
 Note: times are measured in milliseconds
 
