@@ -120,3 +120,9 @@ make norminette		runs norminette on all source files
 Coming from my previous pipex project, this project was done without too many issues. It would have been nice to do the bonuses but I thought they were not that meaningful. ``minishell`` here I come!
 
 October 13th, 2021
+
+<p align="center">
+  <a href="https://github.com/madebypixel02/pipex">&#11013;</a>
+  <a href="https://github.com/madebypixel02/42-Madrid-Cursus">&#127968;</a>
+  <a href="https://github.com/madebypixel02/minishell">&#10145;</a>
+</p>
