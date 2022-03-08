@@ -1,4 +1,4 @@
-# philosophers
+# philosophers | 42 Madrid
 
 *I’ve never thought philosophy would be so deadly 💀*
 
