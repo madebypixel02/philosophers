@@ -90,7 +90,7 @@ The subject for this project asked that we uploaded all our files inside a folde
 * Cloning the repository
 
 ```shell
-git clone https://github.com/madebypixel02/philosophers.git
+git clone https://gitlab.com/madebypixel02/philosophers.git
 cd philosophers/philo
 make
 ```
